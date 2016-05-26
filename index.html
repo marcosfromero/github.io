@@ -1,3 +1,82 @@
+<html>
+  <head>
+    <script type="text/javascript">
+      var getNumeroByLetra = function(letra) {
+		var numeroPorLetra = {
+			A: "14",
+			B: "01",
+			C: "00",
+			D: "16",
+			E: "05",
+			F: "20",
+			G: "19",
+			H: "09",
+			I: "24",
+			J: "07",
+			K: "21",
+			L: "08",
+			M: "04",
+			N: "13",
+			O: "25",
+			P: "22",
+			Q: "18",
+			R: "10",
+			S: "02",
+			T: "06",
+			U: "12",
+			V: "23",
+			W: "11",
+			X: "03",
+			Y: "15",
+			Z: "17"
+		};
+
+		return numeroPorLetra[letra];
+};
+
+var sumaTiraNumeros = function(numeros, salto) {
+    var num = 0;
+    for(i=numeros.length-1; i>=0; i=i-salto) {
+    	num += parseInt(numeros[i]);
+    }
+    return num;
+}
+ 
+var dv = function() {
+   var dominio = document.getElementById('dominio').value;
+   var char = '';
+   var numeros = '';
+    for(i=0; i<dominio.length; i++) {
+      char = dominio.charAt(i);
+      if(isNaN(char)) {
+        numeros += getNumeroByLetra(char.toUpperCase());
+      } else {
+        numeros += char;
+      }
+    }
+    
+    
+    var num1 = sumaTiraNumeros(numeros, 2);
+    
+    while(num1>10) {
+    	num1 = sumaTiraNumeros(''+num1, 1);
+    }
+
+		var num2 = sumaTiraNumeros(numeros.substr(0,numeros.length-1), 2);
+    
+    while(num2>10) {
+    	num2 = sumaTiraNumeros(''+num2, 1);
+    }
+    
+    document.getElementById('dv').value = ''+num1+num2;
+};
+ 
+    </script>
+  </head>
+  <body>
 <label for="dominio">Dominio: </label><input type="text" id="dominio" value="" />
 <input type="button" id="calcular" value="Calcular DV" onclick="dv();"/>
 <input type="text" readonly="readonly" id="dv" />
+    
+  </body>
+</html>
